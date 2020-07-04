@@ -62,6 +62,22 @@ public class LockerRobotTest {
         primaryLockerRobot.save(bag);
         primaryLockerRobot.save(new Bag("m"));
     }
+
+    @Test
+    public void give_a_l_bag_and_a_s_locker_and_a_primary_locker_robot_with_a_m_locker_and_supe_locker_robot_has_valid_caption_when_people_save_then_save_success_and_given_ticket() throws Exception {
+        //given
+        Bag bag = new Bag("L");
+        Locker locker = new Locker("s",2);
+        Locker locker2 = new Locker("M",2);
+        Locker locker3 = new Locker("L",2);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(locker2));
+
+        //when
+        Ticket ticket = superLockerRobot.save(bag);
+        //then
+        Assert.assertNotNull(ticket);
+    }
     //endregion
     //endregion
 }
