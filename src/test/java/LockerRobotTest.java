@@ -246,6 +246,36 @@ public class LockerRobotTest {
         locker.pickUp(ticket);
 
     }
-    //endRegion
     //endregion
+    //endregion
+
+    //#region VIP用户
+    //#region 存包
+    @Test
+    public void given_a_s_bag_and_a_manager_has_a_s_locker_when_manager_save_bag_then_save_success() throws Exception {
+        //given
+        Bag bag = new Bag("s");
+        RobtManager manager = new RobtManager(Arrays.asList(new Locker("s",1)));
+        //when
+        Ticket ticket = manager.save(bag);
+        //then
+        Assert.assertNotNull(ticket);
+    }
+
+    @Test
+    public void given_a_s_bag_and_a_manager_has_a_s_locker_without_valid_caption_when_manager_save_bag_then_save_success() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("Locker is full");
+
+        //given
+        Bag bag = new Bag("s");
+        RobtManager manager = new RobtManager(Arrays.asList(new Locker("s",1)));
+        manager.save(bag);
+        //when
+        manager.save(new Bag("s"));
+
+    }
+    //#endregion
+    //#endregion
 }
