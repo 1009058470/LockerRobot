@@ -362,6 +362,19 @@ public class LockerRobotTest {
         //then
         Assert.assertEquals(bag,bag1);
     }
+
+    @Test
+    public void given_a_manager_a_m_bag_and_save_success_and_a_no_valid_ticket_when_manager_pickup_bag_then_pick_up_success() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("no vaild ticket");
+        //given
+        RobtManager robtManager = new RobtManager(Arrays.asList(new Locker("s",1)),Arrays.asList(getPrimaryLockerRobot(false)),Arrays.asList());
+        Bag bag = new Bag("m");
+        robtManager.save(bag);
+        //when
+        robtManager.pickup(new Ticket());
+    }
     //#endregion
     //#endregion
 }
