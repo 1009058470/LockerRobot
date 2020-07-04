@@ -169,7 +169,34 @@ public class LockerRobotTest {
         PrimaryLockerRobot primaryLockerRobot = getPrimaryLockerRobot(false);
         primaryLockerRobot.save(bag);
         //when
-        Bag bag2 = primaryLockerRobot.pickUp(new Ticket());
+        primaryLockerRobot.pickUp(new Ticket());
+    }
+
+    @Test
+    public void given_a_l_bag_and_save_success_and_give_a_valid_ticket_when_super_locker_robot_pick_up_bag_and_then_pick_up_successful() throws Exception {
+        //given
+        Bag bag = new Bag("m");
+        SuperLockerRobot superLockerRobot = getSuperLockerRobot(false);
+        Ticket ticket = superLockerRobot.save(bag);
+        //when
+        Bag bag1 = superLockerRobot.pickUp(ticket);
+        //then
+        Assert.assertEquals(bag,bag1);
+    }
+
+    @Test
+    public void given_a_l_bag_and_save_success_and_give_a_no_valid_ticket_when_super_locker_robot_pick_up_bag_and_then_pick_up_successful() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("no vaild ticket");
+
+        //given
+        Bag bag = new Bag("m");
+        SuperLockerRobot superLockerRobot = getSuperLockerRobot(false);
+        superLockerRobot.save(bag);
+        //when
+        Bag bag1 = superLockerRobot.pickUp(new Ticket());
+
     }
     //endRegion
     //endregion
