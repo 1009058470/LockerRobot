@@ -7,8 +7,13 @@ import java.util.Map;
 public class PrimaryLockerRobot extends Robot{
     private Map<Ticket,Bag> ticketBagMap = new HashMap<>();
 
-    public PrimaryLockerRobot(List<Locker> lockers) {
+    public PrimaryLockerRobot(List<Locker> lockers) throws Exception {
         super(lockers);
+        for(Locker locker:lockers){
+            if(!locker.getLockerSize().equals("m")){
+                throw new Exception("no vaild setting");
+            }
+        }
     }
 
     @Override

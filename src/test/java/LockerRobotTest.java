@@ -88,7 +88,7 @@ public class LockerRobotTest {
         //given
         Bag bag = new Bag("L");
         Locker locker = new Locker("s",2);
-        Locker locker2 = new Locker("M",2);
+        Locker locker2 = new Locker("m",2);
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
         SuperLockerRobot superLockerRobot = getSuperLockerRobot(false);
 
@@ -106,7 +106,7 @@ public class LockerRobotTest {
         //given
         Bag bag = new Bag("L");
         Locker locker = new Locker("s",2);
-        Locker locker2 = new Locker("M",2);
+        Locker locker2 = new Locker("m",2);
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
         SuperLockerRobot superLockerRobot = getSuperLockerRobot(true);
 
@@ -422,6 +422,26 @@ public class LockerRobotTest {
         RobtManager robtManager = new RobtManager(Arrays.asList(new Locker("m",1)),Arrays.asList(),Arrays.asList());
         //when
 
+    }
+
+    @Test
+    public void given_primary_locker_robot_a_m_locker_then_success() throws Exception{
+        //given
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(new Locker("m",1)));
+        //when
+        //then
+        Assert.assertNotNull(primaryLockerRobot);
+    }
+
+    @Test
+    public void given_primary_locker_robot_a_s_locker_then_success() throws Exception{
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("no vaild setting");
+
+        //given
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(new Locker("s",1)));
+        //when
     }
     //#endregion
 }
