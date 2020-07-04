@@ -145,6 +145,18 @@ public class LockerRobotTest {
         Bag bag2 = locker.pickUp(new Ticket());
 
     }
+
+    @Test
+    public void given_a_m_bag_and_save_success_and_give_a_valid_ticket_when_people_pick_up_bag_and_then_pick_up_successful() throws Exception {
+        //given
+        Bag bag = new Bag("m");
+        PrimaryLockerRobot primaryLockerRobot = getPrimaryLockerRobot(false);
+        Ticket ticket = primaryLockerRobot.save(bag);
+        //when
+        Bag bag2 = primaryLockerRobot.pickUp(ticket);
+        //then
+        Assert.assertEquals(bag,bag2);
+    }
     //endRegion
     //endregion
 }
