@@ -1,8 +1,11 @@
 import com.sun.org.apache.xpath.internal.objects.XNull;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RobtManager {
+    private Map<Ticket,Bag> ticketBagMap = new HashMap<>();
     private List<SuperLockerRobot> superLockerRobots;
     private List<PrimaryLockerRobot> primaryLockerRobot;
     private List<Locker> lockers;
@@ -73,12 +76,16 @@ public class RobtManager {
                 }catch (Exception e){ }
             }
         }
-        if (ticket != null)
+        if (ticket != null){
+            ticketBagMap.put(ticket,bag);
             return ticket;
+        }
         throw new Exception("Locker is full");
     }
 
     public Bag pickup(Ticket ticket) throws Exception {
+        if(!ticketBagMap.containsKey(ticket))
+            throw new Exception("no vaild ticket");
         Bag bag = null;
         for(Locker locker:lockers){
             bag = locker.pickUp(ticket);

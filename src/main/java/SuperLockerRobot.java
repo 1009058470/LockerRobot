@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SuperLockerRobot extends Robot{
-    private  Map<Ticket,Ticket> ticketTicketMap = new HashMap<>();
     private Map<Ticket,Bag> ticketBagMap = new HashMap<>();
     public SuperLockerRobot(List<Locker> lockers) {
         super(lockers);
