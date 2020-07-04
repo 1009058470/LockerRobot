@@ -1,16 +1,11 @@
 import java.util.List;
 
-public class PrimaryLockerRobot {
-    private final List<Locker> lockers;
-    private int leftCaption;
-
+public class PrimaryLockerRobot extends Robot{
     public PrimaryLockerRobot(List<Locker> lockers) {
-        this.lockers = lockers;
-        for (Locker locker : lockers) {
-            leftCaption += locker.getlLeftCaption();
-        }
+        super(lockers);
     }
 
+    @Override
     public Ticket save(Bag bag) throws Exception {
         if(leftCaption!=0){
             leftCaption-=1;

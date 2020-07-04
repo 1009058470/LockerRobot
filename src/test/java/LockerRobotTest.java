@@ -8,6 +8,28 @@ import java.util.Arrays;
 public class LockerRobotTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+    private PrimaryLockerRobot getPrimaryLockerRobot(boolean IsFull) throws Exception {
+        Locker locker = new Locker("M",2);
+        if (IsFull) {
+            for(int i = 0;i <2;i++){
+                locker.save(new Bag("M"));
+            }
+        }
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker));
+        return primaryLockerRobot;
+    }
+
+    private SuperLockerRobot getSuperLockerRobot(boolean IsFull) throws Exception {
+        Locker locker = new Locker("L",2);
+        if (IsFull) {
+            for(int i = 0;i <2;i++){
+                locker.save(new Bag("L"));
+            }
+        }
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(locker));
+        return superLockerRobot;
+    }
+
     //region 普通用户
     //region 存包
     @Test
@@ -40,8 +62,7 @@ public class LockerRobotTest {
         //given
         Bag bag = new Bag("m");
         Locker locker = new Locker("s",2);
-        Locker locker2 = new Locker("M",2);
-        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
+        PrimaryLockerRobot primaryLockerRobot = getPrimaryLockerRobot(false);
         //when
         Ticket ticket = primaryLockerRobot.save(bag);
         //then
@@ -56,8 +77,7 @@ public class LockerRobotTest {
         //given
         Bag bag = new Bag("m");
         Locker locker = new Locker("s",2);
-        Locker locker2 = new Locker("M",1);
-        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
+        PrimaryLockerRobot primaryLockerRobot = getPrimaryLockerRobot(true);
         //when
         primaryLockerRobot.save(bag);
         primaryLockerRobot.save(new Bag("m"));
@@ -69,9 +89,8 @@ public class LockerRobotTest {
         Bag bag = new Bag("L");
         Locker locker = new Locker("s",2);
         Locker locker2 = new Locker("M",2);
-        Locker locker3 = new Locker("L",2);
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
-        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(locker3));
+        SuperLockerRobot superLockerRobot = getSuperLockerRobot(false);
 
         //when
         Ticket ticket = superLockerRobot.save(bag);
@@ -88,9 +107,8 @@ public class LockerRobotTest {
         Bag bag = new Bag("L");
         Locker locker = new Locker("s",2);
         Locker locker2 = new Locker("M",2);
-        Locker locker3 = new Locker("L",1);
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
-        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(locker3));
+        SuperLockerRobot superLockerRobot = getSuperLockerRobot(true);
 
         //when
         superLockerRobot.save(bag);
