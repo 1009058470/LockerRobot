@@ -77,4 +77,14 @@ public class RobtManager {
             return ticket;
         throw new Exception("Locker is full");
     }
+
+    public Bag pickup(Ticket ticket) throws Exception {
+        Bag bag = null;
+        for(Locker locker:lockers){
+            bag = locker.pickUp(ticket);
+            if(bag!=null)
+                break;
+        }
+        return bag;
+    }
 }

@@ -310,6 +310,33 @@ public class LockerRobotTest {
         //then
         Assert.assertNotNull(ticket);
     }
+
+    @Test
+    public void given_a_l_bag_and_a_manager_has_a_super_locker_robot_with_a_l_locker_without_valid_caption_when_manager_save_bag_then_save_success() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("Locker is full");
+
+        //given
+        Bag bag = new Bag("l");
+        RobtManager manager = new RobtManager(Arrays.asList(),Arrays.asList(),Arrays.asList(getSuperLockerRobot(true)));
+        //when
+        manager.save(bag);
+    }
+    //#endregion
+
+    //#region 取包
+    @Test
+    public void given_a_manager_a_bag_and_save_success_and_a_valid_ticket_when_manager_pickup_bag_then_pick_up_success() throws Exception {
+        //given
+        RobtManager robtManager = new RobtManager(Arrays.asList(new Locker("s",1)),Arrays.asList(),Arrays.asList());
+        Bag bag = new Bag("s");
+        Ticket ticket = robtManager.save(bag);
+        //when
+        Bag bag1 = robtManager.pickup(ticket);
+        //then
+        Assert.assertEquals(bag,bag1);
+    }
     //#endregion
     //#endregion
 }
