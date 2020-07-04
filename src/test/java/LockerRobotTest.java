@@ -9,10 +9,10 @@ public class LockerRobotTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     private PrimaryLockerRobot getPrimaryLockerRobot(boolean IsFull) throws Exception {
-        Locker locker = new Locker("M",2);
+        Locker locker = new Locker("m",2);
         if (IsFull) {
             for(int i = 0;i <2;i++){
-                locker.save(new Bag("M"));
+                locker.save(new Bag("m"));
             }
         }
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker));
@@ -20,10 +20,10 @@ public class LockerRobotTest {
     }
 
     private SuperLockerRobot getSuperLockerRobot(boolean IsFull) throws Exception {
-        Locker locker = new Locker("L",2);
+        Locker locker = new Locker("l",2);
         if (IsFull) {
             for(int i = 0;i <2;i++){
-                locker.save(new Bag("L"));
+                locker.save(new Bag("l"));
             }
         }
         SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(locker));
