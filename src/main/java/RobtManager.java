@@ -101,7 +101,13 @@ public class RobtManager {
                     break;
             }
         }
-
+        if(ticket.getBagSize().equals("l")){
+            for(SuperLockerRobot superLockerRobot:this.superLockerRobots){
+                bag = superLockerRobot.pickUp(ticket);
+                if(bag!=null)
+                    break;
+            }
+        }
         return bag;
     }
 }
