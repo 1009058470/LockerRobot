@@ -274,7 +274,30 @@ public class LockerRobotTest {
         manager.save(bag);
         //when
         manager.save(new Bag("s"));
+    }
 
+    @Test
+    public void given_a_m_bag_and_a_manager_has_a_primate_locker_robot_with_a_m_locker_when_manager_save_bag_then_save_success() throws Exception {
+        //given
+        Bag bag = new Bag("m");
+        RobtManager manager = new RobtManager(Arrays.asList(),Arrays.asList(getPrimaryLockerRobot(false)));
+        //when
+        Ticket ticket = manager.save(bag);
+        //then
+        Assert.assertNotNull(ticket);
+    }
+
+    @Test
+    public void given_a_m_bag_and_a_manager_has_a_primate_locker_robot_with_a_m_locker_with_no_valid_caption_when_manager_save_bag_then_save_success() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("Locker is full");
+
+        //given
+        Bag bag = new Bag("m");
+        RobtManager manager = new RobtManager(Arrays.asList(),Arrays.asList(getPrimaryLockerRobot(true)));
+        //when
+        manager.save(bag);
     }
     //#endregion
     //#endregion
