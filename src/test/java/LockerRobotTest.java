@@ -402,4 +402,15 @@ public class LockerRobotTest {
     }
     //#endregion
     //#endregion
+
+    //#region 配置Rebot和Manger
+    @Test
+    public void given_manager_a_s_locker_then_success(){
+        //given
+        RobtManager robtManager = new RobtManager(Arrays.asList(new Locker("s",1)),Arrays.asList(),Arrays.asList());
+        //when
+        //then
+        Assert.assertNotNull(robtManager);
+    }
+    //#endregion
 }

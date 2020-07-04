@@ -117,18 +117,6 @@ then 存包成功，产生票据
 6 given 让manager存了一个L号的包，并且给它一个无效票据
   when manager去SuperLockerRobot取包
   then 取包失败，票据无效
---------------型号不对-------------------------
-7 given 让manager存了一个L号的包，并且给它一个有效票据
-  when manager去PrimaryLockerRobot取包
-  then 取包失败，票的型号不对
-
-8 given 让manager存了一个s号的包，并且给它一个有效票据
-  when manager去SuperLockerRobot取包
-  then 取包失败，票的型号不对
-
-9 given 让manager存了一个L号的包，并且给它一个有效票据
-  when manager去 Locker取包
-  then 取包失败，票的型号不对
 ```
 **Tasking 配置Rebot和Manger**
 ```
