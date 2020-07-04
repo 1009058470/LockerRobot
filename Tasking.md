@@ -140,7 +140,7 @@ then 存包成功，产生票据
   when 
   then 配置成功
 
-5 given 给SuperLockerRobot 配一个S号的柜子
+6 given 给SuperLockerRobot 配一个S号的柜子
   when 
   then 配置失败
 ```

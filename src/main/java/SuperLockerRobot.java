@@ -4,9 +4,14 @@ import java.util.Map;
 
 public class SuperLockerRobot extends Robot{
     private Map<Ticket,Bag> ticketBagMap = new HashMap<>();
-    public SuperLockerRobot(List<Locker> lockers) {
+    public SuperLockerRobot(List<Locker> lockers) throws Exception {
         super(lockers);
+        for(Locker locker:lockers){
+            if(!locker.getLockerSize().equals("l"))
+                throw new Exception("no vaild setting");
+        }
     }
+
 
     @Override
     public Ticket save(Bag bag) throws Exception {

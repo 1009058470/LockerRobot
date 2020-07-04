@@ -443,5 +443,25 @@ public class LockerRobotTest {
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(new Locker("s",1)));
         //when
     }
+
+    @Test
+    public void given_super_locker_robot_a_l_locker_then_success() throws Exception{
+        //given
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(new Locker("l",1)));
+        //when
+        //then
+        Assert.assertNotNull(superLockerRobot);
+    }
+
+    @Test
+    public void given_super_locker_robot_a_s_locker_then_success() throws Exception{
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("no vaild setting");
+
+        //given
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(new Locker("s",1)));
+        //when
+    }
     //#endregion
 }
