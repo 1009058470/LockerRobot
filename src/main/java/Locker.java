@@ -1,8 +1,10 @@
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class Locker {
     private int caption;
     private int leftCaption;
+    private Map<Ticket,Bag> ticketBagMap = new HashMap<>();
 
     public Locker(String lockerSize, int caption) {
         this.caption = caption;
@@ -13,7 +15,9 @@ public class Locker {
         if(leftCaption>0)
         {
             leftCaption-=1;
-            return new Ticket();
+            Ticket ticket = new Ticket();
+            ticketBagMap.put(ticket,bag);
+            return ticket;
         }
 
         throw new Exception("Locker is full");
@@ -21,5 +25,11 @@ public class Locker {
 
     public int getlLeftCaption() {
         return leftCaption;
+    }
+
+    public Bag pickUp(Ticket ticket) throws Exception {
+        if(!ticketBagMap.containsKey(ticket))
+            throw new Exception("no vaild ticket");
+        return ticketBagMap.get(ticket);
     }
 }

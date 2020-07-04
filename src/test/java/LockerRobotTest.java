@@ -116,5 +116,35 @@ public class LockerRobotTest {
     }
 
     //endregion
+
+    //region 取包
+    @Test
+    public void given_a_s_bag_and_save_success_and_give_a_valid_ticket_when_people_pick_up_bag_and_then_pick_up_successful() throws Exception {
+        //give
+        Locker locker = new Locker("s",1);
+        Bag bag = new Bag("s");
+        Ticket ticket = locker.save(bag);
+        //when
+        Bag bag2 = locker.pickUp(ticket);
+        //then
+        Assert.assertEquals(bag,bag2);
+    }
+
+    @Test
+    public void given_a_s_bag_and_save_success_and_give_a_no_valid_ticket_when_people_pick_up_bag_and_then_pick_up_successful() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("no vaild ticket");
+
+
+        //give
+        Locker locker = new Locker("s",1);
+        Bag bag = new Bag("s");
+        locker.save(bag);
+        //when
+        Bag bag2 = locker.pickUp(new Ticket());
+
+    }
+    //endRegion
     //endregion
 }
