@@ -349,7 +349,18 @@ public class LockerRobotTest {
         robtManager.save(bag);
         //when
         robtManager.pickup(new Ticket());
+    }
 
+    @Test
+    public void given_a_manager_a_m_bag_and_save_success_and_a_valid_ticket_when_manager_pickup_bag_then_pick_up_success() throws Exception {
+        //given
+        RobtManager robtManager = new RobtManager(Arrays.asList(new Locker("s",1)),Arrays.asList(getPrimaryLockerRobot(false)),Arrays.asList());
+        Bag bag = new Bag("m");
+        Ticket ticket = robtManager.save(bag);
+        //when
+        Bag bag1 = robtManager.pickup(ticket);
+        //then
+        Assert.assertEquals(bag,bag1);
     }
     //#endregion
     //#endregion

@@ -87,11 +87,21 @@ public class RobtManager {
         if(!ticketBagMap.containsKey(ticket))
             throw new Exception("no vaild ticket");
         Bag bag = null;
-        for(Locker locker:lockers){
-            bag = locker.pickUp(ticket);
-            if(bag!=null)
-                break;
+        if(ticket.getBagSize().equals("s")){
+            for(Locker locker:lockers){
+                bag = locker.pickUp(ticket);
+                if(bag!=null)
+                    break;
+            }
         }
+        if(ticket.getBagSize().equals("m")){
+            for(PrimaryLockerRobot primaryLockerRobot:this.primaryLockerRobot){
+                bag = primaryLockerRobot.pickUp(ticket);
+                if(bag!=null)
+                    break;
+            }
+        }
+
         return bag;
     }
 }
