@@ -3,10 +3,12 @@ import com.sun.org.apache.xpath.internal.objects.XNull;
 import java.util.List;
 
 public class RobtManager {
+    private List<SuperLockerRobot> superLockerRobots;
     private List<PrimaryLockerRobot> primaryLockerRobot;
     private List<Locker> lockers;
     private int LockerLeftCaption = 0;
     private int primaryLockerRobotLeftCaption = 0;
+    private int superLockerRobotLeftCaption = 0;
 
     public RobtManager(List<Locker> lockers) {
         this.lockers = lockers;
@@ -20,6 +22,14 @@ public class RobtManager {
         this.primaryLockerRobot = primaryLockerRobots;
         for (PrimaryLockerRobot primaryLockerRobot : primaryLockerRobots) {
             this.primaryLockerRobotLeftCaption += primaryLockerRobot.leftCaption;
+        }
+    }
+
+    public RobtManager(List<Locker> lockers, List<PrimaryLockerRobot> primaryLockerRobots, List<SuperLockerRobot> superLockerRobots) {
+        this(lockers, primaryLockerRobots);
+        this.superLockerRobots = superLockerRobots;
+        for (SuperLockerRobot superLockerRobot : superLockerRobots) {
+            this.superLockerRobotLeftCaption += superLockerRobot.leftCaption;
         }
     }
 
@@ -38,19 +48,32 @@ public class RobtManager {
                 }
             }
         }
-        else if(bag.getBagSize().equals("m")){
-            if(primaryLockerRobotLeftCaption>0){
-                primaryLockerRobotLeftCaption-=1;
-                try{
-                    for(PrimaryLockerRobot primaryLockerRobot:this.primaryLockerRobot){
+        else if (bag.getBagSize().equals("m")) {
+            if (primaryLockerRobotLeftCaption > 0) {
+                primaryLockerRobotLeftCaption -= 1;
+                try {
+                    for (PrimaryLockerRobot primaryLockerRobot : this.primaryLockerRobot) {
                         ticket = primaryLockerRobot.save(bag);
-                        if(ticket!=null)
-                            break;;
+                        if (ticket != null)
+                            break;
                     }
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
             }
         }
-        if(ticket!=null)
+        else if(bag.getBagSize().equals("l")){
+            if(superLockerRobotLeftCaption>0){
+                superLockerRobotLeftCaption-=1;
+                try{
+                    for(SuperLockerRobot superLockerRobot:superLockerRobots){
+                        ticket = superLockerRobot.save(bag);
+                        if(ticket!=null)
+                            break;
+                    }
+                }catch (Exception e){ }
+            }
+        }
+        if (ticket != null)
             return ticket;
         throw new Exception("Locker is full");
     }

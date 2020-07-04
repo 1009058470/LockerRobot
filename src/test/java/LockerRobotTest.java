@@ -299,6 +299,17 @@ public class LockerRobotTest {
         //when
         manager.save(bag);
     }
+
+    @Test
+    public void given_a_l_bag_and_a_manager_has_a_super_locker_robot_with_a_l_locker_when_manager_save_bag_then_save_success() throws Exception {
+        //given
+        Bag bag = new Bag("l");
+        RobtManager manager = new RobtManager(Arrays.asList(),Arrays.asList(),Arrays.asList(getSuperLockerRobot(false)));
+        //when
+        Ticket ticket = manager.save(bag);
+        //then
+        Assert.assertNotNull(ticket);
+    }
     //#endregion
     //#endregion
 }
