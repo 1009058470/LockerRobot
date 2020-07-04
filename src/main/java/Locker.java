@@ -15,7 +15,7 @@ public class Locker {
         if(leftCaption>0)
         {
             leftCaption-=1;
-            Ticket ticket = new Ticket();
+            Ticket ticket = new Ticket("s");
             ticketBagMap.put(ticket,bag);
             return ticket;
         }
@@ -28,6 +28,8 @@ public class Locker {
     }
 
     public Bag pickUp(Ticket ticket) throws Exception {
+        if(!ticket.getBagSize().equals("s"))
+            throw new Exception("ticket is no match");
         if(!ticketBagMap.containsKey(ticket))
             throw new Exception("no vaild ticket");
         return ticketBagMap.get(ticket);

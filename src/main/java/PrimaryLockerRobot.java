@@ -14,7 +14,7 @@ public class PrimaryLockerRobot extends Robot{
     @Override
     public Ticket save(Bag bag) throws Exception {
         if(leftCaption!=0){
-            Ticket ticket = new Ticket();
+            Ticket ticket = new Ticket("m");
             ticketBagMap.put(ticket,bag);
             leftCaption-=1;
             return ticket;
@@ -23,6 +23,8 @@ public class PrimaryLockerRobot extends Robot{
     }
 
     public Bag pickUp(Ticket ticket) throws Exception {
+        if(!ticket.getBagSize().equals("m"))
+            throw new Exception("ticket is no match");
         if(!ticketBagMap.containsKey(ticket))
             throw new Exception("no vaild ticket");
         return ticketBagMap.get(ticket);

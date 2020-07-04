@@ -142,7 +142,7 @@ public class LockerRobotTest {
         Bag bag = new Bag("s");
         locker.save(bag);
         //when
-        Bag bag2 = locker.pickUp(new Ticket());
+        Bag bag2 = locker.pickUp(new Ticket("s"));
 
     }
 
@@ -169,13 +169,13 @@ public class LockerRobotTest {
         PrimaryLockerRobot primaryLockerRobot = getPrimaryLockerRobot(false);
         primaryLockerRobot.save(bag);
         //when
-        primaryLockerRobot.pickUp(new Ticket());
+        primaryLockerRobot.pickUp(new Ticket("m"));
     }
 
     @Test
     public void given_a_l_bag_and_save_success_and_give_a_valid_ticket_when_super_locker_robot_pick_up_bag_and_then_pick_up_successful() throws Exception {
         //given
-        Bag bag = new Bag("m");
+        Bag bag = new Bag("l");
         SuperLockerRobot superLockerRobot = getSuperLockerRobot(false);
         Ticket ticket = superLockerRobot.save(bag);
         //when
@@ -188,14 +188,62 @@ public class LockerRobotTest {
     public void given_a_l_bag_and_save_success_and_give_a_no_valid_ticket_when_super_locker_robot_pick_up_bag_and_then_pick_up_successful() throws Exception {
         //then
         thrown.expect(Exception.class);
-        thrown.expectMessage("no vaild ticket");
+        thrown.expectMessage("ticket is no match");
 
         //given
-        Bag bag = new Bag("m");
+        Bag bag = new Bag("l");
         SuperLockerRobot superLockerRobot = getSuperLockerRobot(false);
         superLockerRobot.save(bag);
         //when
         Bag bag1 = superLockerRobot.pickUp(new Ticket());
+
+    }
+
+    @Test
+    public void given_a_s_bag_and_save_success_and_give_a_no_valid_ticket_when_super_locker_robot_pick_up_bag_and_then_pick_up_fail_and_get_message_ticker_is_not_match() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("ticket is no match");
+
+        //given
+        Bag bag = new Bag("s");
+        Locker locker = new Locker("s",1);
+        Ticket ticket = locker.save(bag);
+        SuperLockerRobot superLockerRobot = getSuperLockerRobot(false);
+        //when
+        superLockerRobot.pickUp(ticket);
+
+    }
+
+    @Test
+    public void given_a_s_bag_and_save_success_and_give_a_no_valid_ticket_when_primary_locker_robot_pick_up_bag_and_then_pick_up_fail_and_get_message_ticker_is_not_match() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("ticket is no match");
+
+        //given
+        Bag bag = new Bag("s");
+        Locker locker = new Locker("s",1);
+        Ticket ticket = locker.save(bag);
+        PrimaryLockerRobot primaryLockerRobot = getPrimaryLockerRobot(false);
+        //when
+        primaryLockerRobot.pickUp(ticket);
+
+    }
+
+    @Test
+    public void given_a_l_bag_and_save_success_and_give_a_no_valid_ticket_when_locker_pick_up_bag_and_then_pick_up_fail_and_get_message_ticker_is_not_match() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("ticket is no match");
+
+        //given
+        Bag bag = new Bag("l");
+        SuperLockerRobot superLockerRobot = getSuperLockerRobot(false);
+        Locker locker = new Locker("s",1);
+        Ticket ticket = superLockerRobot.save(bag);
+        //when
+        locker.pickUp(ticket);
 
     }
     //endRegion
