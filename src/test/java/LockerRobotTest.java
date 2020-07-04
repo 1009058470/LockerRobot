@@ -36,9 +36,9 @@ public class LockerRobotTest {
     }
 
     @Test
-    public void give_a_m_bag_and_a_s_locker_and_a_primary_locker_robot_with_a_m_locker_has_valid_caption_when_people_save_then_save_success_and_given_ticket(){
+    public void give_a_m_bag_and_a_s_locker_and_a_primary_locker_robot_with_a_m_locker_has_valid_caption_when_people_save_then_save_success_and_given_ticket() throws Exception {
         //given
-        Bag bag = new Bag("s");
+        Bag bag = new Bag("m");
         Locker locker = new Locker("s",2);
         Locker locker2 = new Locker("M",2);
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
@@ -46,6 +46,21 @@ public class LockerRobotTest {
         Ticket ticket = primaryLockerRobot.save(bag);
         //then
         Assert.assertNotNull(ticket);
+    }
+
+    @Test
+    public void give_a_m_bag_and_a_s_locker_and_a_primary_locker_robot_with_a_m_locker_has_no_valid_caption_when_people_save_then_save_success_and_given_ticket() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("Locker is full");
+        //given
+        Bag bag = new Bag("m");
+        Locker locker = new Locker("s",2);
+        Locker locker2 = new Locker("M",1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
+        //when
+        primaryLockerRobot.save(bag);
+        primaryLockerRobot.save(new Bag("m"));
     }
     //endregion
     //endregion

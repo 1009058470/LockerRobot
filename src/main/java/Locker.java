@@ -18,4 +18,8 @@ public class Locker {
 
         throw new Exception("Locker is full");
     }
+
+    public int getlLeftCaption() {
+        return leftCaption;
+    }
 }
