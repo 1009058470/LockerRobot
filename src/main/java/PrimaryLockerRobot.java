@@ -22,7 +22,9 @@ public class PrimaryLockerRobot extends Robot{
         throw new Exception("Locker is full");
     }
 
-    public Bag pickUp(Ticket ticket) {
+    public Bag pickUp(Ticket ticket) throws Exception {
+        if(!ticketBagMap.containsKey(ticket))
+            throw new Exception("no vaild ticket");
         return ticketBagMap.get(ticket);
     }
 }
