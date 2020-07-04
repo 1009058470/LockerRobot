@@ -13,14 +13,16 @@ public class RobtManager {
     private int primaryLockerRobotLeftCaption = 0;
     private int superLockerRobotLeftCaption = 0;
 
-    public RobtManager(List<Locker> lockers) {
+    public RobtManager(List<Locker> lockers) throws Exception {
         this.lockers = lockers;
         for (Locker locker : lockers) {
+            if(!locker.getLockerSize().equals("s"))
+                throw new Exception("no vaild setting");
             this.LockerLeftCaption += locker.getlLeftCaption();
         }
     }
 
-    public RobtManager(List<Locker> lockers, List<PrimaryLockerRobot> primaryLockerRobots) {
+    public RobtManager(List<Locker> lockers, List<PrimaryLockerRobot> primaryLockerRobots) throws Exception {
         this(lockers);
         this.primaryLockerRobot = primaryLockerRobots;
         for (PrimaryLockerRobot primaryLockerRobot : primaryLockerRobots) {
@@ -28,7 +30,7 @@ public class RobtManager {
         }
     }
 
-    public RobtManager(List<Locker> lockers, List<PrimaryLockerRobot> primaryLockerRobots, List<SuperLockerRobot> superLockerRobots) {
+    public RobtManager(List<Locker> lockers, List<PrimaryLockerRobot> primaryLockerRobots, List<SuperLockerRobot> superLockerRobots) throws Exception {
         this(lockers, primaryLockerRobots);
         this.superLockerRobots = superLockerRobots;
         for (SuperLockerRobot superLockerRobot : superLockerRobots) {

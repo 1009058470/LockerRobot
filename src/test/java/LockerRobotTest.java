@@ -405,12 +405,23 @@ public class LockerRobotTest {
 
     //#region 配置Rebot和Manger
     @Test
-    public void given_manager_a_s_locker_then_success(){
+    public void given_manager_a_s_locker_then_success() throws Exception {
         //given
         RobtManager robtManager = new RobtManager(Arrays.asList(new Locker("s",1)),Arrays.asList(),Arrays.asList());
         //when
         //then
         Assert.assertNotNull(robtManager);
+    }
+
+    @Test
+    public void given_manager_a_m_locker_then_failed() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("no vaild setting");
+        //given
+        RobtManager robtManager = new RobtManager(Arrays.asList(new Locker("m",1)),Arrays.asList(),Arrays.asList());
+        //when
+
     }
     //#endregion
 }

@@ -4,6 +4,11 @@ import java.util.Map;
 public class Locker {
     private int caption;
     private int leftCaption;
+
+    public String getLockerSize() {
+        return lockerSize;
+    }
+
     protected String lockerSize;
 
     public Map<Ticket, Bag> getTicketBagMap() {
