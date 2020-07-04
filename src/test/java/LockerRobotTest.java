@@ -71,13 +71,32 @@ public class LockerRobotTest {
         Locker locker2 = new Locker("M",2);
         Locker locker3 = new Locker("L",2);
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
-        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(locker2));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(locker3));
 
         //when
         Ticket ticket = superLockerRobot.save(bag);
         //then
         Assert.assertNotNull(ticket);
     }
+
+    @Test
+    public void give_a_l_bag_and_a_s_locker_and_a_primary_locker_robot_with_a_m_locker_and_supe_locker_robot_has_no_valid_caption_when_people_save_then_save_success_and_given_ticket() throws Exception {
+        //then
+        thrown.expect(Exception.class);
+        thrown.expectMessage("Locker is full");
+        //given
+        Bag bag = new Bag("L");
+        Locker locker = new Locker("s",2);
+        Locker locker2 = new Locker("M",2);
+        Locker locker3 = new Locker("L",1);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
+        SuperLockerRobot superLockerRobot = new SuperLockerRobot(Arrays.asList(locker3));
+
+        //when
+        superLockerRobot.save(bag);
+        superLockerRobot.save(bag);
+    }
+
     //endregion
     //endregion
 }
