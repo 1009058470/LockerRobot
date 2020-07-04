@@ -3,6 +3,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.util.Arrays;
+
 public class LockerRobotTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -31,6 +33,19 @@ public class LockerRobotTest {
         locker.save(bag);
         //when
         locker.save(bag);
+    }
+
+    @Test
+    public void give_a_m_bag_and_a_s_locker_and_a_primary_locker_robot_with_a_m_locker_has_valid_caption_when_people_save_then_save_success_and_given_ticket(){
+        //given
+        Bag bag = new Bag("s");
+        Locker locker = new Locker("s",2);
+        Locker locker2 = new Locker("M",2);
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(Arrays.asList(locker2));
+        //when
+        Ticket ticket = primaryLockerRobot.save(bag);
+        //then
+        Assert.assertNotNull(ticket);
     }
     //endregion
     //endregion
